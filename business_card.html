@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Business Card — Kasim Hassen, RCP</title>
     <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            margin: 0;
             padding: 40px;
             background: #e8e8e8;
             font-family: 'Georgia', 'Times New Roman', serif;
@@ -20,7 +20,6 @@
             color: #555;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin: 0;
         }
         .card {
             width: 3.5in;
@@ -35,7 +34,6 @@
             position: relative;
             overflow: hidden;
         }
-        /* Front */
         .front { text-align: left; }
         .front .accent {
             position: absolute;
@@ -53,12 +51,13 @@
             margin-left: 10px;
         }
         .front .title {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: #555;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             margin-bottom: 16px;
             margin-left: 10px;
+            white-space: nowrap;
         }
         .front .info {
             font-size: 0.72rem;
@@ -66,10 +65,7 @@
             margin-left: 10px;
             line-height: 1.8;
         }
-        .front .info a {
-            color: #333;
-            text-decoration: none;
-        }
+        .front .info a { color: #333; text-decoration: none; }
         .front .info .label {
             display: inline-block;
             width: 14px;
@@ -78,7 +74,6 @@
             color: #2c3e50;
             font-weight: bold;
         }
-        /* Back */
         .back {
             text-align: center;
             align-items: center;
@@ -114,7 +109,11 @@
             margin-top: 6px;
             letter-spacing: 1px;
         }
-        .print-btn {
+        .btn-row {
+            display: flex;
+            gap: 16px;
+        }
+        .btn {
             background: #2c3e50;
             color: #fff;
             border: none;
@@ -123,8 +122,12 @@
             border-radius: 4px;
             cursor: pointer;
             font-family: inherit;
+            text-decoration: none;
+            display: inline-block;
         }
-        .print-btn:hover { background: #1a252f; }
+        .btn:hover { background: #1a252f; }
+        .btn-vcard { background: #27ae60; }
+        .btn-vcard:hover { background: #1e8449; }
         .instructions {
             max-width: 500px;
             text-align: center;
@@ -134,7 +137,7 @@
         }
         @media print {
             body { background: #fff; padding: 0; }
-            .print-btn, .instructions, h2 { display: none; }
+            .btn-row, .instructions, h2 { display: none; }
             .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
         }
     </style>
@@ -144,8 +147,8 @@
     <h2>Front</h2>
     <div class="card front">
         <div class="accent"></div>
-        <div class="name">Kasim Hassen</div>
-        <div class="title">Registered Respiratory Care Practitioner</div>
+        <div class="name">Kasim Hassen, RCP</div>
+        <div class="title">Registered Respiratory Therapist</div>
         <div class="info">
             <div><span class="label">&#9742;</span> 810-523-8233</div>
             <div><span class="label">&#9993;</span> <a href="mailto:kasimmisak@hotmail.com">kasimmisak@hotmail.com</a></div>
@@ -156,18 +159,48 @@
     <h2>Back</h2>
     <div class="card back">
         <div class="name-back">KH</div>
-        <div class="tagline">Respiratory Therapist</div>
+        <div class="tagline">Registered Respiratory Therapist</div>
         <div class="qr-placeholder">
             <img src="resume_qr.png" alt="QR Code to Resume">
         </div>
         <div class="qr-label">Scan for Resume</div>
     </div>
 
-    <button class="print-btn" onclick="window.print()">Print Cards</button>
+    <div class="btn-row">
+        <button class="btn" onclick="window.print()">Print Cards</button>
+        <a class="btn btn-vcard" href="#" id="vcardBtn">Save Contact (vCard)</a>
+    </div>
     <p class="instructions">
         Print at actual size (100%) on cardstock. Front and back are 3.5&Prime; &times; 2&Prime; (standard US business card).
-        The QR code links to your online resume.
+        The QR code links to your online resume. Use "Save Contact" to download a .vcf file you can share digitally.
     </p>
+
+    <script>
+        document.getElementById('vcardBtn').addEventListener('click', function(e) {
+            e.preventDefault();
+            var vcard = [
+                'BEGIN:VCARD',
+                'VERSION:3.0',
+                'N:Hassen;Kasim;;;',
+                'FN:Kasim Hassen, RCP',
+                'TITLE:Registered Respiratory Therapist',
+                'TEL;TYPE=CELL:810-523-8233',
+                'EMAIL;TYPE=INTERNET:kasimmisak@hotmail.com',
+                'ADR;TYPE=HOME:;;Westland;MI;;48185;US',
+                'URL:https://kas271010.github.io/khassen-RCP/',
+                'END:VCARD'
+            ].join('\n');
+            var blob = new Blob([vcard], { type: 'text/vcard;charset=utf-8' });
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = 'Kasim_Hassen_RCP.vcf';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+    </script>
 
 </body>
 </html>
