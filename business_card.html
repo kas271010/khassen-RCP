@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Card — Kasim Hassen, RCP</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            background: #e8e8e8;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+        h2 {
+            font-size: 1rem;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0;
+        }
+        .card {
+            width: 3.5in;
+            height: 2in;
+            background: #fff;
+            border-radius: 6px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 0.35in;
+            position: relative;
+            overflow: hidden;
+        }
+        /* Front */
+        .front { text-align: left; }
+        .front .accent {
+            position: absolute;
+            top: 0; left: 0;
+            width: 6px;
+            height: 100%;
+            background: #2c3e50;
+        }
+        .front .name {
+            font-size: 1.15rem;
+            font-weight: bold;
+            color: #1a1a1a;
+            letter-spacing: 1px;
+            margin-bottom: 2px;
+            margin-left: 10px;
+        }
+        .front .title {
+            font-size: 0.75rem;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+            margin-left: 10px;
+        }
+        .front .info {
+            font-size: 0.72rem;
+            color: #333;
+            margin-left: 10px;
+            line-height: 1.8;
+        }
+        .front .info a {
+            color: #333;
+            text-decoration: none;
+        }
+        .front .info .label {
+            display: inline-block;
+            width: 14px;
+            text-align: center;
+            margin-right: 6px;
+            color: #2c3e50;
+            font-weight: bold;
+        }
+        /* Back */
+        .back {
+            text-align: center;
+            align-items: center;
+            background: #2c3e50;
+            color: #fff;
+        }
+        .back .name-back {
+            font-size: 1.1rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+        }
+        .back .tagline {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            opacity: 0.7;
+            margin-bottom: 18px;
+        }
+        .back .qr-placeholder {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto;
+        }
+        .back .qr-placeholder img {
+            width: 100%;
+            height: 100%;
+            border-radius: 4px;
+        }
+        .back .qr-label {
+            font-size: 0.55rem;
+            opacity: 0.5;
+            margin-top: 6px;
+            letter-spacing: 1px;
+        }
+        .print-btn {
+            background: #2c3e50;
+            color: #fff;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .print-btn:hover { background: #1a252f; }
+        .instructions {
+            max-width: 500px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #666;
+            line-height: 1.6;
+        }
+        @media print {
+            body { background: #fff; padding: 0; }
+            .print-btn, .instructions, h2 { display: none; }
+            .card { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Front</h2>
+    <div class="card front">
+        <div class="accent"></div>
+        <div class="name">Kasim Hassen</div>
+        <div class="title">Registered Respiratory Care Practitioner</div>
+        <div class="info">
+            <div><span class="label">&#9742;</span> 810-523-8233</div>
+            <div><span class="label">&#9993;</span> <a href="mailto:kasimmisak@hotmail.com">kasimmisak@hotmail.com</a></div>
+            <div><span class="label">&#9670;</span> Westland, MI 48185</div>
+        </div>
+    </div>
+
+    <h2>Back</h2>
+    <div class="card back">
+        <div class="name-back">KH</div>
+        <div class="tagline">Respiratory Therapist</div>
+        <div class="qr-placeholder">
+            <img src="resume_qr.png" alt="QR Code to Resume">
+        </div>
+        <div class="qr-label">Scan for Resume</div>
+    </div>
+
+    <button class="print-btn" onclick="window.print()">Print Cards</button>
+    <p class="instructions">
+        Print at actual size (100%) on cardstock. Front and back are 3.5&Prime; &times; 2&Prime; (standard US business card).
+        The QR code links to your online resume.
+    </p>
+
+</body>
+</html>
